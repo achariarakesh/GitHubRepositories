@@ -1,69 +1,22 @@
+//def ReleaseDir = "c:\inetpub\wwwroot"
+
 pipeline {
 
-    agent any 
+			agent any
 
-    stages {
+			stages {
 
-        stage('Static Analysis') {
+				
+				stage('Build') {
 
-            steps {
+    					steps {
 
-                echo 'Run the static analysis to the code' 
+    					    bat "\"${tool 'MSBuild'}\" TestWebSolution\TestWebSolution.sln /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=c:\\inetpub\\wwwroot"
 
-            }
+    					}
 
-        }
+				}
 
-        stage('Compile') {
-
-            steps {
-
-                echo 'Compile the source code' 
-
-            }
-
-        }
-
-        stage('Security Check') {
-
-            steps {
-
-                echo 'Run the security check against the application' 
-
-            }
-
-        }
-
-        stage('Run Unit Tests') {
-
-            steps {
-
-                echo 'Run unit tests from the source code' 
-
-            }
-
-        }
-
-        stage('Run Integration Tests') {
-
-            steps {
-
-                echo 'Run only crucial integration tests from the source code' 
-
-            }
-
-        }
-
-        stage('Publish Artifacts') {
-
-            steps {
-
-                echo 'Save the assemblies generated from the compilation' 
-
-            }
-
-        }
-
-    }
+			}
 
 }
