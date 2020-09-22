@@ -1,24 +1,15 @@
-//def ReleaseDir = "c:\inetpub\wwwroot"
-
 pipeline {
-
-	environment {
-    		MSBUILD = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin"
-  	}
-
-			stages {
-
-				
-				stage('Build') {
-
-    					steps {
-
-    					    bat "\"${MSBuild}\" TestWebSolution.sln /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=c:\\inetpub\\wwwroot"
-
-    					}
-
-				}
-
-			}
-
+  environment {
+    MSBUILD = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin"
+    CONFIG = 'Release'
+    PLATFORM = 'x64'
+  }
+  stages {
+    stage('Build') {
+      steps {
+        bat "NuGet.exe restore TestWebSolution.sln"
+        bat "\"${MSBuild}\" TestWebSolution.sln /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=c:\\inetpub\\wwwroot"
+      }
+    }
+  }
 }
