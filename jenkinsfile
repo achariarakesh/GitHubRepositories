@@ -4,7 +4,7 @@ agent any
     stage('Build') {
       steps {
         bat "C:\\nuget\\nuget.exe restore C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\TestWebSolution.sln"
-        bat "\"${tool 'MSBuildLocal'}\" TestWebSolution\\TestWebSolution.sln /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=c:\\inetpub\\wwwroot\\TestPipeline"
+        bat "\"${tool 'MSBuildLocal'}\" TestWebSolution\\TestWebSolution.sln /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=c:\\inetpub\\wwwroot"
       }
     }
   }
