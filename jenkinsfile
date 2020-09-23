@@ -3,7 +3,7 @@ agent any
   stages {
     stage('Unit test'){
       steps {
-	  bat "\"${tool 'MSTest'}\" /testcontainer:C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\UnitTestProject1\\bin\\Release\\UnitTestProject1.dll /nologo /category:Build"
+	  bat "\"${tool 'MSTest'}\" /testcontainer:C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\UnitTestProject1\\bin\\Release\\UnitTestProject1.dll /nologo"
 	  }
     }
     stage('Build') {
