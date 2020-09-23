@@ -3,3 +3,5 @@
 ################################################################################
 
 /TestWebSolution/packages
+/TestWebSolution/NUnitTestProject/bin/Debug
+/TestWebSolution/NUnitTestProject/obj/Debug
