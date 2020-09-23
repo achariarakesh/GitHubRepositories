@@ -3,7 +3,7 @@ agent any
   stages {
     stage('Unit test') {
       steps{
-      bat "C:\\PROGRA~2\\"Microsoft Visual Studio"\\2017\\Enterprise\\Common7\\IDE\\MSTest.exe /resultsfile:C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\Results.trx /testcontainer:C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\UnitTestProject1\\bin\\Release\\UnitTestProject1.dll" /nologo
+      bat "C:\\PROGRA~2\\"Microsoft Visual Studio"\\2017\\Enterprise\\Common7\\IDE\\MSTest.exe /resultsfile:C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\Results.trx /testcontainer:C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\UnitTestProject1\\bin\\Release\\UnitTestProject1.dll"/nologo
       }
     }
     stage('Build') {
