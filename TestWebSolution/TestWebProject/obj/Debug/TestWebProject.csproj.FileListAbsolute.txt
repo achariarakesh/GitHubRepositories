@@ -78,7 +78,6 @@ C:\Users\AL2414\GitRepository\GitHubRepositories\TestWebSolution\TestWebProject\
 C:\Users\AL2414\GitRepository\GitHubRepositories\TestWebSolution\TestWebProject\bin\System.Web.WebPages.Razor.xml
 C:\Users\AL2414\GitRepository\GitHubRepositories\TestWebSolution\TestWebProject\bin\Antlr3.Runtime.pdb
 C:\Users\AL2414\GitRepository\GitHubRepositories\TestWebSolution\TestWebProject\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\AL2414\GitRepository\GitHubRepositories\TestWebSolution\TestWebProject\obj\Debug\TestWebProject.csprojAssemblyReference.cache
 C:\Users\AL2414\GitRepository\GitHubRepositories\TestWebSolution\TestWebProject\obj\Debug\TestWebProject.csproj.CoreCompileInputs.cache
 C:\Users\AL2414\GitRepository\GitHubRepositories\TestWebSolution\TestWebProject\obj\Debug\TestWebProject.csproj.CopyComplete
 C:\Users\AL2414\GitRepository\GitHubRepositories\TestWebSolution\TestWebProject\obj\Debug\TestWebProject.dll
