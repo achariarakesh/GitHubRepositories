@@ -2,9 +2,7 @@ pipeline {
 agent any
   stages {
     stage('Unit test') {
-      steps{
-      bat "C:\\PROGRA~2\\"Microsoft Visual Studio"\\2017\\Enterprise\\Common7\\IDE\\MSTest.exe /testcontainer:C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\UnitTestProject1\\bin\\Release\\UnitTestProject1.dll"
-     }
+      steps{bat "C:\\PROGRA~2\\"Microsoft Visual Studio"\\2017\\Enterprise\\Common7\\IDE\\MSTest.exe /testcontainer:C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\UnitTestProject1\\bin\\Release\\UnitTestProject1.dll"}
     }
     stage('Build') {
       steps {
