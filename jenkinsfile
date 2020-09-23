@@ -2,7 +2,7 @@ pipeline {
 agent any
   stages {
   
-    stage('Unit test'){
+    stage('MSTest Unit test'){
       steps {
           bat "C:\\nuget\\nuget.exe restore C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\TestWebSolution.sln"
           bat "\"${tool 'MSBuildLocal'}\" TestWebSolution\\TestWebSolution.sln /p:DeployOnBuild=false /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True"
@@ -10,6 +10,11 @@ agent any
 	  bat "C:\\nuget\\TrxerConsole.exe TestWebSolution\\Results.trx"
 	  step([$class: 'MSTestPublisher', testResultsFile:"**/*.trx", failOnError: true, keepLongStdio: true])
 	 }
+    }
+      stage('Nunit Unit test'){
+      steps {
+        bat "C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe TestWebSolution\\NUnitTestProject\\bin\\Release\\NUnitTestProject.dll" 
+      }
     }
     stage('Build') {
       steps {
