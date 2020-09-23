@@ -5,20 +5,15 @@ agent any
       steps {
           bat "C:\\nuget\\nuget.exe restore C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\TestWebSolution.sln"
           bat "\"${tool 'MSBuildLocal'}\" TestWebSolution\\TestWebSolution.sln /p:DeployOnBuild=false /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True"
-	  bat "\"${tool 'MSTest'}\" /testcontainer:C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\UnitTestProject1\\bin\\Release\\UnitTestProject1.dll /resultsfile:Results.trx"
+	  bat "\"${tool 'MSTest'}\" /testcontainer:C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\UnitTestProject1\\bin\\Release\\UnitTestProject1.dll /resultsfile:TestWebSolution\\Results.trx"
 	  step([$class: 'MSTestPublisher', testResultsFile:"**/*.trx", failOnError: true, keepLongStdio: true])
-	  bat "C:\\nuget\\TrxerConsole.exe Results.trx"
-	  }
+	  bat "C:\\nuget\\TrxerConsole.exe TestWebSolution\\Results.trx"
+	 }
     }
     stage('Build') {
       steps {
           bat "\"${tool 'MSBuildLocal'}\" TestWebSolution\\TestWebSolution.sln /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=C:\\Jenkinsdeploy\\WebPipeline"
       }
     }
-    stage('CleanWorkspace') {
-            steps {
-                cleanWs()
-            }
-        }
   }
 }
