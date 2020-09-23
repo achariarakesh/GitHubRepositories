@@ -1,6 +1,11 @@
 pipeline {
 agent any
   stages {
+    stage('Unit test'){
+      steps {
+	  bat "\"${tool 'MSTest'}\" /testcontainer:C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\UnitTestProject1\\bin\\Release\\UnitTestProject1.dll"
+	  }
+    }
     stage('Build') {
       steps {
         bat "C:\\nuget\\nuget.exe restore C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\TestWebSolution.sln"
