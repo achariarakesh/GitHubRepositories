@@ -1,6 +1,11 @@
 pipeline {
 agent any
   stages {
+    stage('CleanWorkspace') {
+            steps {
+                cleanWs()
+            }
+        }
     stage('Unit test'){
       steps {
           bat "C:\\nuget\\nuget.exe restore C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\TestWebSolution.sln"
