@@ -5,9 +5,9 @@ agent any
     stage('MSTest Unit test'){
       steps {
       	 
-	  echo '${workspace}'
+	  echo "${workspace}"
 	  echo ${workspace}
-	  echo '${WORKSPACE}'
+	  echo "${WORKSPACE}"
 	  echo ${WORKSPACE}
       
           bat "C:\\nuget\\nuget.exe restore C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\TestWebSolution.sln"
