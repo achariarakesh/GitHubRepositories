@@ -1,17 +1,13 @@
-pipeline {
-agent {
 node {
-       
-	stage 'Compile'
-		echo 'checkout'
+
+
+       	stage 'Compile'
+		echo ${WORKSPACE}
 
 	stage 'Unittest'
 		echo 'build'
 
 	stage 'Deploy'
 		echo 'archine'
+}
 
-
-}
-}
-}
