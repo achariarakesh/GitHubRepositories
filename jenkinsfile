@@ -10,14 +10,15 @@ node {
 	
 	stage('Unittest'){
 	    try{
-		echo testfolderpath
+	       echo testfolderpath
+	       bat "\"C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe\" ${testfolderpath}\\NUnitTestProject.dll --work=${testfolderpath}\\TestResult + env.BUILD_ID --out=TestResult.txt --result=TestResult.xml;format=nunit2" 
 	    }
 	    finally{
-	    
+	   
 
 	    }
 	}
-		
+	
 
 	stage 'Deploy'
 		echo 'archine'
