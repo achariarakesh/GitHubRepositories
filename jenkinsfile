@@ -36,7 +36,7 @@ parameters {
   post {
 	always {
 		
-	 step([$class: 'NUnitPublisher', testResultsPattern: {$params.testWorkspace} + 'TestWebSolution\\NUnitTestProject\\bin\\Release\\TestResult.xml', debug: false, keepJUnitReports: true, skipJUnitArchiver:false, failIfNoResults: true])
+	 step([$class: 'NUnitPublisher', testResultsPattern: {$params.testWorkspace}\\'TestWebSolution\\NUnitTestProject\\bin\\Release\\TestResult.xml', debug: false, keepJUnitReports: true, skipJUnitArchiver:false, failIfNoResults: true])
 	}
 	}
 }
