@@ -37,7 +37,7 @@ parameters {
   post {
 	always {
 		
-	 step([$class: 'NUnitPublisher', testResultsPattern: ${env.WORKSPACE}\\${params.testWorkspace}, debug: false, keepJUnitReports: true, skipJUnitArchiver:false, failIfNoResults: true])
+	 step([$class: 'NUnitPublisher', testResultsPattern: "${env.WORKSPACE}\\${params.testWorkspace}", debug: false, keepJUnitReports: true, skipJUnitArchiver:false, failIfNoResults: true])
 	}
 	}
 }
