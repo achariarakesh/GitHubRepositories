@@ -32,7 +32,7 @@ agent any
   }
   post {
 	always {
-	 step([$class: 'NUnitPublisher', testResultsPattern: 'TestWebSolution\\NUnitTestProject\\bin\\Release\\TestResult.xml', debug: false, keepJUnitReports: true, skipJUnitArchiver:false, failIfNoResults: true])
+	 step([$class: 'NUnitPublisher', testResultsPattern: "TestWebSolution\\NUnitTestProject\\bin\\Release\\TestResult.xml", debug: false, keepJUnitReports: true, skipJUnitArchiver:false, failIfNoResults: true])
 	}
 	}
 }
