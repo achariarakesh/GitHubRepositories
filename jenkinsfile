@@ -16,7 +16,7 @@ node {
 	        bat "\"C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe\" ${testfolderpath}\\NUnitTestProject.dll --work=${testResultfolderpath} --out=TestResult.txt --result=TestResult.xml;format=nunit2" 
 	    }
 	    finally{
-	       step([$class: 'NUnitPublisher', testResultsPattern: 'TestResult.xml', debug: false, failIfNoResults: true])
+	       step([$class: 'NUnitPublisher', testResultsPattern: '*.xml', debug: false, failIfNoResults: true])
 	    }
 	}
 	
