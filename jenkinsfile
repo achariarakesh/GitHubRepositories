@@ -1,5 +1,6 @@
+pipeline {
+agent {
 node {
-
        
 	stage 'Compile'
 		echo 'checkout'
@@ -9,10 +10,8 @@ node {
 
 	stage 'Deploy'
 		echo 'archine'
-		
-	always {	
-		echo 'always'
-	}
-	
 
+
+}
+}
 }
