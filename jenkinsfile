@@ -1,16 +1,23 @@
 node {
 	def workspace = pwd();
+	def testfolderpath = workspace + "\\TestWebSolution\\NUnitTestProject\\bin\\Release\\";
 
-       	stage('Compile')
-	{
+       	stage('Compile'){
 	   echo "Compiling.."
 	   bat "\"C:\\nuget\\nuget.exe\" restore ${workspace}\\TestWebSolution\\TestWebSolution.sln"
 	   bat "\"${tool 'MSBuildLocal'}\" ${workspace}\\TestWebSolution\\TestWebSolution.sln /p:DeployOnBuild=false /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True"
  	}
-		
+	
+	stage('Unittest'){
+	    try{
+		echo testfolderpath
+	    }
+	    finaly{
+	    
 
-	stage 'Unittest'
-		echo env.BUILD_ID
+	    }
+	}
+		
 
 	stage 'Deploy'
 		echo 'archine'
