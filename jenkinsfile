@@ -13,7 +13,7 @@ agent any
     }
       stage('Nunit Unit test'){
       steps {
-        bat "C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe TestWebSolution\\NUnitTestProject\\bin\\Release\\NUnitTestProject.dll /xml=nunit-result.xml" 
+        bat "C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe TestWebSolution\\NUnitTestProject\\bin\\Release\\NUnitTestProject.dll xml=nunit-result.xml" 
       }
     }
     stage('Build') {
