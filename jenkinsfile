@@ -1,7 +1,7 @@
 pipeline {
 agent any
 parameters {
-        string(name: 'testWorkspace', defaultValue: ${env.WORKSPACE}\\TestWebSolution\\NUnitTestProject\\bin\\Release\\TestResult.xml, description: 'currentworkspace')
+        string(name: 'testWorkspace', defaultValue: ${env.WORKSPACE}"\\TestWebSolution\\NUnitTestProject\\bin\\Release\\TestResult.xml", description: 'currentworkspace')
 	}
   stages {
   
