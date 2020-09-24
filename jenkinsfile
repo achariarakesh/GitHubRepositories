@@ -33,7 +33,7 @@ agent any
   post {
 	always {
 	
-	 def jsonPath = "${env.WORKSPACE}" + "\\TestWebSolution\\NUnitTestProject\\bin\\Release\\TestResult.xml"
+	 def jsonPath = ${env.WORKSPACE} + "\\TestWebSolution\\NUnitTestProject\\bin\\Release\\TestResult.xml"
 	 echo jsonPath
 	 step([$class: 'NUnitPublisher', testResultsPattern: jsonPath, debug: false, keepJUnitReports: true, skipJUnitArchiver:false, failIfNoResults: true])
 	}
