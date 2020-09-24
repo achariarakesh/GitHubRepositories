@@ -1,4 +1,4 @@
-def slnPath     = "${env.WORKSPACE}\\\\TestWebSolution\\NUnitTestProject\\bin\\Release\\TestResult.xml"
+def slnPath     = "${WORKSPACE}\\\\TestWebSolution\\NUnitTestProject\\bin\\Release\\TestResult.xml"
 
 pipeline {
 agent any
