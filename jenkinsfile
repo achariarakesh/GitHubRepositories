@@ -1,9 +1,8 @@
 node {
 	 def workspace = pwd();
 
-       	stage 'Compile'
+       	stage('Compile')
 	{
-	   echo 'compiling..';
 	   bat "\"C:\\nuget\\nuget.exe\" restore ${workspace}\\TestPipeline\\TestWebSolution\\TestWebSolution.sln"
 	}
 		
