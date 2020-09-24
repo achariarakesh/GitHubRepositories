@@ -5,7 +5,7 @@ node {
 		echo 'compile';
 
 	stage 'Unittest'
-		echo workspace
+		echo ${env.BUILD_ID}
 
 	stage 'Deploy'
 		echo 'archine'
