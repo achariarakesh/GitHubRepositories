@@ -13,7 +13,7 @@ agent any
     }
       stage('Nunit Unit test'){
       steps {
-        bat "C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe TestWebSolution\\NUnitTestProject\\bin\\Release\\NUnitTestProject.dll --where cat==test --work=TestWebSolution\\NUnitTestProject\\bin\\Release\\ --out=TestResult.txt --result=TestResult.xml;format=nunit2" 
+        bat "C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe TestWebSolution\\NUnitTestProject\\bin\\Release\\NUnitTestProject.dll --work=TestWebSolution\\NUnitTestProject\\bin\\Release\\ --out=TestResult.txt --result=TestResult.xml;format=nunit2" 
         step([$class: 'NUnitPublisher', testResultsPattern: 'TestResult.xml', debug: false, keepJUnitReports: true, skipJUnitArchiver:false, failIfNoResults: true])
       }
     }
