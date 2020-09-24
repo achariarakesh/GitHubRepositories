@@ -2,7 +2,11 @@ node {
 	 def workspace = pwd();
 
        	stage 'Compile'
-		echo 'compile';
+	{
+	   echo 'compiling..';
+	   bat "C:\\nuget\\nuget.exe restore $workspace\\TestPipeline\\TestWebSolution\\TestWebSolution.sln"
+	}
+		
 
 	stage 'Unittest'
 		echo env.BUILD_ID
