@@ -10,10 +10,9 @@ node {
 	stage 'Deploy'
 		echo 'archine'
 		
-	post {
 	always {	
 		echo 'always'
 	}
-	}
+	
 
 }
