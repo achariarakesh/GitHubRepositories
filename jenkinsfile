@@ -1,7 +1,7 @@
 pipeline {
 agent any
 parameters {
-        string(name: 'testWorkspace', defaultValue: ${env.WORKSPACE}, description: 'currentworkspace')
+        string(name: 'testWorkspace', defaultValue: "${env.WORKSPACE}", description: 'currentworkspace')
 	}
   stages {
   
