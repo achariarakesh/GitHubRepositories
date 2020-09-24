@@ -1,11 +1,19 @@
 node {
-	stage 'Checkout'
+
+       
+	stage 'Compile'
 		echo 'checkout'
 
-	stage 'Build'
+	stage 'Unittest'
 		echo 'build'
 
-	stage 'Archive'
+	stage 'Deploy'
 		echo 'archine'
+		
+	post {
+	always {	
+		echo 'always'
+	}
+	}
 
 }
