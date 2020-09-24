@@ -1,7 +1,7 @@
 node {
 	def workspace = pwd();
 	def testfolderpath = workspace + "\\TestWebSolution\\NUnitTestProject\\bin\\Release\\";
-	def testResultfolderpath = workspace + "\\TestResult" + env.BUILD_ID;
+	def testResultfolderpath = workspace + "\\TestWebSolution\\TestResult_" + env.BUILD_ID;
 
        	stage('Compile'){
 	   echo "Compiling.."
@@ -11,11 +11,10 @@ node {
 	
 	stage('Unittest'){
 	    try{
-	       echo testResultfolderpath
-	       bat "\"C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe\" ${testfolderpath}\\NUnitTestProject.dll --work=${testResultfolderpath} --out=TestResult.txt --result=TestResult.xml;format=nunit2" 
+	        bat "\"C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe\" ${testfolderpath}\\NUnitTestProject.dll --work=${testResultfolderpath} --out=TestResult.txt --result=TestResult.xml;format=nunit2" 
 	    }
 	    finally{
-	   
+	       step([$class: 'NUnitPublisher', testResultsPattern: "${testResultfolderpath}\\TestResult.xml", debug: false, keepJUnitReports: true, skipJUnitArchiver:false, failIfNoResults: true])
 
 	    }
 	}
