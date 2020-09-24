@@ -1,11 +1,11 @@
 node {
-	 def worksp = pwd();
+	 def workspace = pwd();
 
        	stage 'Compile'
 		echo 'compile';
 
 	stage 'Unittest'
-		echo ${workspace}
+		echo workspace
 
 	stage 'Deploy'
 		echo 'archine'
