@@ -13,6 +13,7 @@ node {
 	
 	stage('Unittest'){
 	    try{
+	        bat('MKDIR testresults')
 	        bat "\"C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe\" ${testfolderpath}\\NUnitTestProject.dll --work=${testResultfolderpath} --out=TestResult.txt --result=TestResult.xml;format=nunit2" 
 	    }
 	    finally{
