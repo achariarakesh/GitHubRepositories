@@ -1,7 +1,7 @@
 pipeline {
 agent any
 parameters {
-        string(name: 'testWorkspace', defaultValue: "${env.WORKSPACE}\\TestWebSolution\\NUnitTestProject\\bin\\Release\\TestResult.xml", description: 'currentworkspace')
+        string(name: 'testWorkspace', defaultValue: ${env.WORKSPACE}\\TestWebSolution\\NUnitTestProject\\bin\\Release\\TestResult.xml, description: 'currentworkspace')
 	}
   stages {
   
@@ -9,7 +9,7 @@ parameters {
       steps {
       	 
 	  echo "${env.WORKSPACE}"
-	  echo "${params.testWorkspace}"
+	  echo "${env.WORKSPACE}\\TestWebSolution\\NUnitTestProject\\bin\\Release\\TestResult.xml"
       
           bat "C:\\nuget\\nuget.exe restore C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\TestWebSolution.sln"
           bat "\"${tool 'MSBuildLocal'}\" TestWebSolution\\TestWebSolution.sln /p:DeployOnBuild=false /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True"
