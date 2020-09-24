@@ -1,6 +1,7 @@
 node {
 	def workspace = pwd();
 	def testfolderpath = workspace + "\\TestWebSolution\\NUnitTestProject\\bin\\Release\\";
+	def testResultfolderpath = workspace + "\\TestResult" + env.BUILD_ID;
 
        	stage('Compile'){
 	   echo "Compiling.."
@@ -10,8 +11,8 @@ node {
 	
 	stage('Unittest'){
 	    try{
-	       echo testfolderpath
-	       bat "\"C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe\" ${testfolderpath}\\NUnitTestProject.dll --work=${testfolderpath}\\TestResult + env.BUILD_ID --out=TestResult.txt --result=TestResult.xml;format=nunit2" 
+	       echo testResultfolderpath
+	       bat "\"C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe\" ${testfolderpath}\\NUnitTestProject.dll --work=${testResultfolderpath} --out=TestResult.txt --result=TestResult.xml;format=nunit2" 
 	    }
 	    finally{
 	   
