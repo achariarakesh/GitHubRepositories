@@ -4,24 +4,21 @@ agent any
   
     stage('MSTest Unit test'){
       steps {
-      	 
-	  echo ${env.WORKSPACE}
-      
-          bat "C:\\nuget\\nuget.exe restore C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\TestWebSolution.sln"
+          bat "C:\\nuget\\nuget.exe restore ${env.WORKSPACE}\\TestWebSolution\\TestWebSolution.sln"
           bat "\"${tool 'MSBuildLocal'}\" TestWebSolution\\TestWebSolution.sln /p:DeployOnBuild=false /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True"
-	  bat "\"${tool 'MSTest'}\" /testcontainer:C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\UnitTestProject1\\bin\\Release\\UnitTestProject1.dll /resultsfile:TestWebSolution\\Results.trx"
-	  bat "C:\\nuget\\TrxerConsole.exe TestWebSolution\\Results.trx"
-	  step([$class: 'MSTestPublisher', testResultsFile:"**/*.trx", failOnError: true, keepLongStdio: true])
+		  bat "\"${tool 'MSTest'}\" /testcontainer:${env.WORKSPACE}\\TestWebSolution\\UnitTestProject1\\bin\\Release\\UnitTestProject1.dll /resultsfile:TestWebSolution\\Results.trx"
+	      bat "C:\\nuget\\TrxerConsole.exe TestWebSolution\\Results.trx"
+	      step([$class: 'MSTestPublisher', testResultsFile:"**/*.trx", failOnError: true, keepLongStdio: true])
 	 }
     }
       stage('Nunit Unit test'){
       steps {
-        bat "C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe TestWebSolution\\NUnitTestProject\\bin\\Release\\NUnitTestProject.dll --work=TestWebSolution\\NUnitTestProject\\bin\\Release\\ --out=TestResult.txt --result=TestResult.xml;format=nunit2" 
+        bat "C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe ${env.WORKSPACE}\\TestWebSolution\\NUnitTestProject\\bin\\Release\\NUnitTestProject.dll --work=${env.WORKSPACE}\\TestWebSolution\\NUnitTestProject\\bin\\Release\\ --out=TestResult.txt --result=TestResult.xml;format=nunit2" 
       }
     }
     stage('Build') {
       steps {
-          bat "\"${tool 'MSBuildLocal'}\" TestWebSolution\\TestWebSolution.sln /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=C:\\Jenkinsdeploy\\WebPipeline"
+          bat "\"${tool 'MSBuildLocal'}\" ${env.WORKSPACE}\\TestWebSolution\\TestWebSolution.sln /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=C:\\Jenkinsdeploy\\WebPipeline"
       }
     }
 	stage('CleanWorkspace') {
@@ -32,7 +29,7 @@ agent any
   }
   post {
 	always {
-	 step([$class: 'NUnitPublisher', testResultsPattern: 'TestWebSolution\\NUnitTestProject\\bin\\Release\\TestResult.xml', debug: false, keepJUnitReports: true, skipJUnitArchiver:false, failIfNoResults: true])
+	 step([$class: 'NUnitPublisher', testResultsPattern: '${env.WORKSPACE}\\TestWebSolution\\NUnitTestProject\\bin\\Release\\TestResult.xml', debug: false, keepJUnitReports: true, skipJUnitArchiver:false, failIfNoResults: true])
 	}
 	}
 }
