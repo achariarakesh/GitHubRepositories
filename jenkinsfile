@@ -14,10 +14,10 @@ node {
 	stage('Unittest'){
 	    try{
 	        bat('MKDIR testresults')
-	        bat "\"C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe\" ${testfolderpath}\\NUnitTestProject.dll --work=${testResultfolderpath} --out=TestResult.txt --result=TestResult.xml;format=nunit2" 
+	        bat "\"C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe\" ${testfolderpath}\\NUnitTestProject.dll --result=./testresults/TestResult.xml;format=nunit2" 
 	    }
 	    finally{
-	       step([$class: 'NUnitPublisher', testResultsPattern: 'TestWebSolution\\NUnitTestProject\\bin\\Release\\TestResult.xml', debug: false, failIfNoResults: true])
+	       step([$class: 'NUnitPublisher', testResultsPattern: 'testresults/*.xml', debug: false, failIfNoResults: true])
 	    }
 	}
 	
