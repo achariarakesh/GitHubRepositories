@@ -1,10 +1,12 @@
 node {
-	 def workspace = pwd();
+	def workspace = pwd();
 
        	stage('Compile')
 	{
-	   bat "\"C:\\nuget\\nuget.exe\" restore ${workspace}\\TestPipeline\\TestWebSolution\\TestWebSolution.sln"
-	}
+	   echo "Compiling.."
+	   bat "\"C:\\nuget\\nuget.exe\" restore ${workspace}\\TestWebSolution\\TestWebSolution.sln"
+	   bat "\"${tool 'MSBuildLocal'}\" ${workspace}\\TestWebSolution\\TestWebSolution.sln /p:DeployOnBuild=false /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True"
+ 	}
 		
 
 	stage 'Unittest'
