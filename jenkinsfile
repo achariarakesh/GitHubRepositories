@@ -31,6 +31,8 @@ node {
 	       bat "\"C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\packages\\ReportUnit.1.2.1\\tools\\ReportUnit.exe\" ./testresults/TestResult.xml"
 	       
 	       bat "\"C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\packages\\OpenCover.4.7.922\\tools\\OpenCover.Console\" -register:user -target:C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe -targetargs:${testProjectfilepath} -output:./testresults/opencovertests.xml"
+	       
+	       bat "\"C:\Users\AL2414\.jenkins\workspace\TestPipeline\TestWebSolution\packages\ReportGenerator.4.6.7\tools\net47\ReportGenerator.exe -reports:./testresults/opencovertests.xml -targetDir:./testresults"
 	    }
 	}
 	
