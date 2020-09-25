@@ -4,11 +4,6 @@ node {
 	def testProjectfilepath = workspace + "\\TestWebSolution\\NUnitTestProject\\bin\\Release\\NUnitTestProject.dll";
 	def publishfolderpath = workspace + "C:\\Jenkinsdeploy\\WebPipeline";
 
-	stage('Clear')
-	{
-	   echo "Clearing work space.."
-	   cleanWs()
-	}
 	
        	stage('Compile'){
 	   echo "Compiling.."
@@ -38,6 +33,12 @@ node {
 	{
 	    echo "Deploy.."
 	    bat "\"${tool 'MSBuildLocal'}\" ${solutionfolderpath} /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=${publishfolderpath}"
+	}
+	
+	stage('Clear')
+	{
+	   echo "Clearing work space.."
+	   cleanWs()
 	}
 }
 
