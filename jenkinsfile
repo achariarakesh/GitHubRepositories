@@ -1,31 +1,38 @@
-pipeline {
-agent any
-  stages {
-  
-    stage('MSTest Unit test'){
-      steps {
-          bat "C:\\nuget\\nuget.exe restore C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\TestWebSolution.sln"
-          bat "\"${tool 'MSBuildLocal'}\" TestWebSolution\\TestWebSolution.sln /p:DeployOnBuild=false /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True"
-	  bat "\"${tool 'MSTest'}\" /testcontainer:C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\UnitTestProject1\\bin\\Release\\UnitTestProject1.dll /resultsfile:TestWebSolution\\Results.trx"
-	  bat "C:\\nuget\\TrxerConsole.exe TestWebSolution\\Results.trx"
-	  step([$class: 'MSTestPublisher', testResultsFile:"**/*.trx", failOnError: true, keepLongStdio: true])
-	 }
-    }
-      stage('Nunit Unit test'){
-      steps {
-        bat "C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe TestWebSolution\\NUnitTestProject\\bin\\Release\\NUnitTestProject.dll --work=TestWebSolution\\NUnitTestProject\\bin\\Release\\ --out=TestResult.txt --result=TestResult.xml;format=nunit2" 
-        step([$class: 'NUnitPublisher', testResultsPattern: 'TestWebSolution\\NUnitTestProject\\bin\\Release\\TestResult.xml', debug: false, keepJUnitReports: true, skipJUnitArchiver:false, failIfNoResults: true])
-      }
-    }
-    stage('Build') {
-      steps {
-          bat "\"${tool 'MSBuildLocal'}\" TestWebSolution\\TestWebSolution.sln /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=C:\\Jenkinsdeploy\\WebPipeline"
-      }
-    }
-	stage('CleanWorkspace') {
-	    steps {
-		echo 'cleanWs()'
+node {
+	def workspace = pwd();
+	def solutionfolderpath = workspace + "\\TestWebSolution\\TestWebSolution.sln";
+	def testProjectfilepath = workspace + "\\TestWebSolution\\NUnitTestProject\\bin\\Release\\NUnitTestProject.dll";
+	def publishfolderpath = workspace + "C:\\Jenkinsdeploy\\WebPipeline";
+
+	
+       	stage('Compile'){
+	   echo "Compiling.."
+	   bat "\"C:\\nuget\\nuget.exe\" restore ${solutionfolderpath}"
+	   bat "\"${tool 'MSBuildLocal'}\" ${solutionfolderpath} /p:DeployOnBuild=false /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True"
+ 	}
+	
+	stage('Unittest'){
+           echo "Unit test.."
+	    try{
+	        
+	        dir('testresults') 
+		{
+		  deleteDir()
+		}
+		
+	        bat('MKDIR testresults')
+		
+	        bat "\"C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe\" ${testProjectfilepath} --result=./testresults/TestResult.xml;format=nunit2" 
+	    }
+	    finally{
+	       step([$class: 'NUnitPublisher', testResultsPattern: 'testresults/*.xml', debug: false, failIfNoResults: true])
 	    }
 	}
-  }
+	
+	stage('Deploy')
+	{
+	    echo "Deploy.."
+	    bat "\"${tool 'MSBuildLocal'}\" ${solutionfolderpath} /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=${publishfolderpath}"
+	}
 }
+
