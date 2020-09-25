@@ -37,7 +37,7 @@ node {
 	
 	stage('Clear')
 	{
-	   echo "Clearing  work space.."
+	   echo "Clearing work space.."
 	   cleanWs()
 	}
 }
