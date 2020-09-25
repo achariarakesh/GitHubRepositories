@@ -1,8 +1,8 @@
 node {
 	def workspace = pwd();
 	def solutionfolderpath = workspace + "\\TestWebSolution\\TestWebSolution.sln";
-	def testProjectfilepath = workspace + "\\TestWebSolution\\NUnitTestProject\\bin\\Release\\NUnitTestProject.dll";
-	def publishfolderpath = workspace + "C:\\Jenkinsdeploy\\WebPipeline";
+	def testProjectfilepath = workspace + "\\TestWebSolution\\NUnitTestProject\\NUnitTestProject.csproj";
+	def publishfolderpath = "C:\\Jenkinsdeploy\\WebPipeline";
 
 	
        	stage('Compile'){
@@ -38,7 +38,7 @@ node {
 	stage('Clear')
 	{
 	   echo "Clearing work space.."
-	   cleanWs()
+	   echo "cleanWs()"
 	}
 }
 
