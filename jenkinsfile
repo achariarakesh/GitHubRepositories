@@ -22,7 +22,7 @@ node {
 		
 	        bat('MKDIR testresults')
 		
-	        bat "\"C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe\" ${testProjectfilepath} --result=./testresults/TestResult.xml;format=nunit2" 
+	        bat "\"C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe\" ${testProjectfilepath} --config=Release --result=./testresults/TestResult.xml;format=nunit2" 
 	    }
 	    finally{
 	       step([$class: 'NUnitPublisher', testResultsPattern: 'testresults/*.xml', debug: false, failIfNoResults: true])
