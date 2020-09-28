@@ -4,8 +4,8 @@ node {
 	   echo "emailing.."
 	 	 
 	  emailext  body: 'Test build mail', 
-                    subject: "Test subject line", 
-                    mimeType: 'text/html',to: "rakesh.achar@accionlabs.com"
+                    subject: 'Test subject line', 
+                    to: 'rakesh.achar@accionlabs.com'
 	  
  	}
 	
