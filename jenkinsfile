@@ -1,42 +1,26 @@
 node {
-	def workspace = pwd();
-	def solutionfolderpath = workspace + "\\TestWebSolution\\TestWebSolution.sln";
-	def testProjectfilepath = workspace + "\\TestWebSolution\\NUnitTestProject\\NUnitTestProject.csproj";
-	def publishfolderpath = "C:\\Jenkinsdeploy\\WebPipeline";
-
 	
-       	stage('Compile'){
-	   echo "Compiling.."
-	   bat "\"C:\\nuget\\nuget.exe\" restore ${solutionfolderpath}"
-	   bat "\"${tool 'MSBuildLocal'}\" ${solutionfolderpath} /p:DeployOnBuild=false /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True"
+	stage('send email'){
+	   echo "emailing.."
+	 
+	    mail to: 'rakesh.achar@accionlabs.com',
+                 cc : 'rakesh.achar@accionlabs.com',
+                 subject: "BUILD SUCCESSFUL: Build Version",
+                 body: "Build Successful"
+	       
+	    emailtext attachmentsPattern: './testresults/TestResult.html', body: 'Build Successful', subject: 'BUILD SUCCESSFUL: 1.1', to: 'rakesh.achar@accionlabs.com,cc : 'rakesh.achar@accionlabs.com'
+	
+	 
  	}
 	
 	stage('Unittest'){
-           echo "Unit test.."
-	    try{
-	        
-	        dir('testresults') 
-		{
-		  deleteDir()
-		}
-		
-	        bat('MKDIR testresults')
-		
-	        bat "\"C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe\" ${testProjectfilepath} --config=Release --result=./testresults/TestResult.xml;format=nunit2" 
-	    }
-	    finally{
-	    
-	       step([$class: 'NUnitPublisher', testResultsPattern: 'testresults/*.xml', debug: false, failIfNoResults: true])
-	       
-	       bat "\"C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\packages\\ReportUnit.1.2.1\\tools\\ReportUnit.exe\" ./testresults/TestResult.xml"
-	       	
-	    }
+       
 	}
 	
 	stage('Deploy')
 	{
-	    echo "Deploy.."
-	    bat "\"${tool 'MSBuildLocal'}\" ${solutionfolderpath} /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=${publishfolderpath}"
+	  
+	   
 	}
 	
 	stage('Clear')
