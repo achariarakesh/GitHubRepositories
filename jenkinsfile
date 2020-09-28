@@ -10,8 +10,11 @@ node {
                  body: "Build Successful"
 	       
 	  
-	
-	 
+	    emailext (
+	       subject: "A Test EMail",
+	       body: " Test build mail",
+	       to: "rakesh.achar@accionlabs.com")
+  
  	}
 	
 	stage('Unittest'){
