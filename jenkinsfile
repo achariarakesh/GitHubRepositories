@@ -6,8 +6,7 @@ node {
 	    mail to: 'rakesh.achar@accionlabs.com',
                  cc : 'rakesh.achar@accionlabs.com',
                  subject: "BUILD SUCCESSFUL: Build Version",
-		 attachmentsPattern: './testresults/TestResult.html'
-                 body: "Build Successful"
+		 body: "Build Successful"
 	       
 	  
 	    emailext (
