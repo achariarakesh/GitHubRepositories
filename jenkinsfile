@@ -2,18 +2,11 @@ node {
 	
 	stage('send email'){
 	   echo "emailing.."
-	 
-	    mail to: 'rakesh.achar@accionlabs.com',
-                 cc : 'rakesh.achar@accionlabs.com',
-                 subject: "BUILD SUCCESSFUL: Build Version",
-		 body: "Build Successful"
-	       
+	 	 
+	  emailext  body: 'Test build mail', 
+                    subject: "Test subject line", 
+                    mimeType: 'text/html',to: "rakesh.achar@accionlabs.com"
 	  
-	    emailext (
-	       subject: "A Test EMail",
-	       body: " Test build mail",
-	       to: "rakesh.achar@accionlabs.com")
-  
  	}
 	
 	stage('Unittest'){
