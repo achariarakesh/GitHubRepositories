@@ -7,7 +7,7 @@ node {
 		 mail to: 'rakesh.achar@accionlabs.com',
                  cc : 'rakesh.achar@accionlabs.com',
                  subject: "BUILD SUCCESSFUL: Build Version",
-		 body: "Build Successful"
+		 body: "Build Successful ${env.JOB_NAME}"
 		
 	
 	  
