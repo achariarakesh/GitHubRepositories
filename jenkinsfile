@@ -49,7 +49,7 @@ node {
 	}
 	
 	stage('Approval Step'){
-            steps{
+            step{
                 
                 //----------------send an approval prompt-------------
                 script {
