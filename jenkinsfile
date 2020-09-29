@@ -25,7 +25,7 @@ node {
 		 publishHTML (target : [allowMissing: false,
 		 alwaysLinkToLastBuild: true,
 		 keepAll: true,
-		 reportDir: 'reports',
+		 reportDir: '.\\testresults',
 		 reportFiles: '.\\testresults\\TestResult.html',
 		 reportName: 'Test Reports',
 		 reportTitles: 'Test Report'])
