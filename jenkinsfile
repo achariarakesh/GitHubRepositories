@@ -46,14 +46,14 @@ node {
 		  
 		 mail (to: 'rakesh.achar@accionlabs.com',
 		        subject: "Job '${env.JOB_BASE_NAME}' (${env.BUILD_NUMBER}) is waiting for input",
-		     	body: """Please <a href="${env.BUILD_URL}+input">approve me</a>!""");
-			
-			timeout(time:1, unit:'MINUTES') {
+		     	body: """Please <a href="${env.BUILD_URL}input/${tok}/proceed">approve me</a>!""");
 			
 			input message: 'Ready?', token: tok
+			
+			//timeout(time:1, unit:'MINUTES') {
 			//def userInput = input(id: 'userInput', message: 'Job A Failed do you want to build Job B?', ok: 'Yes')
 			//echo userInput
-			}
+			//}
 
 		// mail to: 'rakesh.achar@accionlabs.com',
                 // cc : 'rakesh.achar@accionlabs.com',
