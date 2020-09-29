@@ -7,9 +7,8 @@ node {
         env.ForEmailPlugin = env.WORKSPACE
         emailext mimeType: 'text/html',
         body: '${FILE, path="./testresults/TestResult.html"}',
-        subject: env.JOB_NAME,
-        to: 'rakesh.achar@accionlabs.com',
-	attachLog: true, attachmentsPattern: './testresults/TestResult.html',
+        subject: 'Hello',
+        to: 'rakesh.achar@accionlabs.com'
 	}   
 	
 	
