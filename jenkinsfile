@@ -1,38 +1,42 @@
 node {
 	def workspace = pwd();
-	def testfilename = "${env.BUILD_ID}" + "_TestResult.html"
-	
-	stage('send email'){
-	   echo "emailing.."
-	 	 
-		 echo testfilename
-				 
-		 mail to: 'rakesh.achar@accionlabs.com',
-                 cc : 'rakesh.achar@accionlabs.com',
-                 subject: "BUILD SUCCESSFUL: Build Version",
-		 body: "Build Successful ${env.JOB_NAME}\n\nView the log at:\n ${env.JOB_URL}testresults\\TestResult.html"
-		 
-		 publishHTML target: [
-		    allowMissing: false,
-		    alwaysLinkToLastBuild: false,
-		    keepAll: true,
-		    reportDir: 'testresults',
-		    reportFiles: 'TestResult.html',
-		    reportName: 'Test Report'
-		  ]
-		
-	
-	  BUILD_URL
+	def solutionfolderpath = workspace + "\\TestWebSolution\\TestWebSolution.sln";
+	def testProjectfilepath = workspace + "\\TestWebSolution\\NUnitTestProject\\NUnitTestProject.csproj";
+	def publishfolderpath = "C:\\Jenkinsdeploy\\WebPipeline";
+
+	stage('Compile'){
+	   echo "Compiling.."
+	   bat "\"C:\\nuget\\nuget.exe\" restore ${solutionfolderpath}"
+	   bat "\"${tool 'MSBuildLocal'}\" ${solutionfolderpath} /p:DeployOnBuild=false /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True"
  	}
 	
 	stage('Unittest'){
-       
+           echo "Unit test.."
+	    try{
+	        
+	        dir('testresults') 
+		{
+		  deleteDir()
+		}
+		
+	        bat('MKDIR testresults')
+		
+	        bat "\"C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe\" ${testProjectfilepath} --config=Release --result=./testresults/TestResult.xml;format=nunit2" 
+	    }
+	    finally{
+	    
+	       step([$class: 'NUnitPublisher', testResultsPattern: 'testresults/*.xml', debug: false, failIfNoResults: true])
+	       
+	       bat "\"C:\Users\AL2414\.jenkins\workspace\TestPipeline\TestWebSolution\\packages\\ReportUnit.1.2.1\\tools\\ReportUnit.exe\" ./testresults/TestResult.xml"
+	       	
+	    }
 	}
 	
 	stage('Deploy')
 	{
-	  
-	   
+	    echo "Deploy.."
+	    bat "\"${tool 'MSBuildLocal'}\" ${solutionfolderpath} /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=${publishfolderpath}"
+	
 	}
 	
 	stage('Clear')
