@@ -1,6 +1,6 @@
 node {
 	def workspace = pwd();
-	def testfilename = ${env.BUILD_ID} + "_TestResult.html"
+	def testfilename = "${env.BUILD_ID}" + "_TestResult.html"
 	
 	stage('send email'){
 	   echo "emailing.."
