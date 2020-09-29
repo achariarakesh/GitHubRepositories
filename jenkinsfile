@@ -36,7 +36,7 @@ node {
 		    keepAll: true,
 		    reportDir: 'testresults',
 		    reportFiles: "${env.BUILD_ID}" + "_TestResult.html",
-		    reportName: 'Test Report'
+		    reportName: 'TestReport'
 		  ]
 		  
 		  echo "emailing..."
@@ -44,7 +44,7 @@ node {
 		 mail to: 'rakesh.achar@accionlabs.com',
                  cc : 'rakesh.achar@accionlabs.com',
                  subject: "BUILD SUCCESSFUL: Build Version",
-		 body: "Build Successful ${env.JOB_NAME}\n\nView the test report at:\n ${env.JOB_URL}${testfilename}"
+		 body: "Build Successful ${env.JOB_NAME}\n\nView the test report at:\n ${env.JOB_URL} + "\" + "${env.BUILD_ID}" + "\"+ "TestReport"
 	    }
 	}
 	
