@@ -27,7 +27,7 @@ node {
 		 keepAll: true,
 		 reportDir: '.\\testresults',
 		 reportFiles: '.\\testresults\\TestResult.html',
-		 reportName: 'Test Reports',
+		 reportName: 'TestResult.html',
 		 reportTitles: 'Test Report'])
 		
 	
