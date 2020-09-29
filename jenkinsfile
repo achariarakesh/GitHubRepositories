@@ -21,6 +21,14 @@ node {
                  cc : 'rakesh.achar@accionlabs.com',
                  subject: "BUILD SUCCESSFUL: Build Version",
 		 body: "Build Successful ${env.JOB_NAME}\n\nView the log at:\n ${env.JOB_URL}testresults\\TestResult.html"
+		 
+		 publishHTML (target : [allowMissing: false,
+		 alwaysLinkToLastBuild: true,
+		 keepAll: true,
+		 reportDir: 'reports',
+		 reportFiles: '.\\testresults\\TestResult.html',
+		 reportName: 'Test Reports',
+		 reportTitles: 'Test Report'])
 		
 	
 	  BUILD_URL
