@@ -3,18 +3,18 @@ node {
 	
 	stage('Writing html file')
         {
-        sh 'echo "<html>" >> C:\Users\AL2414\.jenkins\workspace\TestPipeline\testresults\myfile.html'
+        sh 'echo "<html>" >> C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\testresults\\myfile.html'
         sh 'echo "<header><title> This is the title</title></header>" >> myfile.html'
         sh 'echo "<body> how do you do? </body>" >> myfile.html'
         sh 'echo "</html>" >> myfile.html'
-        sh 'ls -al C:\Users\AL2414\.jenkins\workspace\TestPipeline\testresults\myfile.html'
-        sh 'head -1 C:\Users\AL2414\.jenkins\workspace\TestPipeline\testresults\myfile.html'
+        sh 'ls -al C\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\testresults\\myfile.html'
+        sh 'head -1 C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\testresults\\myfile.html'
         }
         stage('Email')
         {
         env.ForEmailPlugin = env.WORKSPACE
         emailext mimeType: 'text/html',
-        body: '${FILE, path="C:\Users\AL2414\.jenkins\workspace\TestPipeline\testresults\myfile.html"}',
+        body: '${FILE, path="C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\testresults\\myfile.html"}',
         subject: env.JOB_NAME,
         to: 'rakesh.achar@accionlabs.com'
         }   
