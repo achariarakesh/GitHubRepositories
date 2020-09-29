@@ -11,13 +11,14 @@ node {
                  subject: "BUILD SUCCESSFUL: Build Version",
 		 body: "Build Successful ${env.JOB_NAME}\n\nView the log at:\n ${env.JOB_URL}testresults\\TestResult.html"
 		 
-		 publishHTML (target : [allowMissing: false,
-		 alwaysLinkToLastBuild: true,
-		 keepAll: true,
-		 reportDir: '.\\testresults',
-		 reportFiles: 'C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\testresults\\TestResult.html',
-		 reportName: 'Test Reports',
-		 reportTitles: 'Test Report'])
+		 publishHTML target: [
+		    allowMissing: false,
+		    alwaysLinkToLastBuild: false,
+		    keepAll: true,
+		    reportDir: 'coverage',
+		    reportFiles: 'index.html',
+		    reportName: 'RCov Report'
+		  ]
 		
 	
 	  BUILD_URL
