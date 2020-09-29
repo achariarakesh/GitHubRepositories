@@ -65,8 +65,8 @@ node {
 	stage('Approval Step'){
          
                //----------------send an approval prompt-------------
-                  env.APPROVED_DEPLOY = input message: 'User input required',
-                   parameters: [choice(name: 'Deploy?', choices: 'no\nyes', description: 'Choose "yes" if you want to deploy this build')]
+                  //env.APPROVED_DEPLOY = input message: 'User input required',
+                   //parameters: [choice(name: 'Deploy?', choices: 'no\nyes', description: 'Choose "yes" if you want to deploy this build')]
                 //-----------------end approval prompt------------
             
         }
