@@ -1,4 +1,5 @@
 node {
+	def workspace = pwd();
 	
 	stage('send email'){
 	   echo "emailing.."
@@ -7,10 +8,10 @@ node {
 		 mail to: 'rakesh.achar@accionlabs.com',
                  cc : 'rakesh.achar@accionlabs.com',
                  subject: "BUILD SUCCESSFUL: Build Version",
-		 body: "Build Successful ${env.JOB_NAME}\n\nView the log at:\n ${env.BUILD_URL}"
+		 body: "Build Successful ${env.JOB_NAME}\n\nView the log at:\n ./testresults/TestResult.html"
 		
 	
-	  
+	  BUILD_URL
  	}
 	
 	stage('Unittest'){
