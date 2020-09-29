@@ -15,9 +15,9 @@ node {
 		    allowMissing: false,
 		    alwaysLinkToLastBuild: false,
 		    keepAll: true,
-		    reportDir: '.\\testresults',
-		    reportFiles: 'index.html',
-		    reportName: 'RCov Report'
+		    reportDir: 'TestPipeline\\testresults',
+		    reportFiles: 'TestResult.html',
+		    reportName: 'Test Report'
 		  ]
 		
 	
