@@ -22,7 +22,7 @@ node {
 		
 	        bat('MKDIR testresults')
 		
-	        bat "\"C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe\" ${testProjectfilepath} --config=Release --result=./testresults/${testfilename};format=nunit2" 
+	        bat "\"C:\\PROGRA~2\\NUnit.org\\nunit-console\\nunit3-console.exe\" ${testProjectfilepath} --config=Release --result=${testfilename};format=nunit2" 
 	    }
 	    finally{
 	    
@@ -38,6 +38,8 @@ node {
 		    reportFiles: ${testfilename},
 		    reportName: 'Test Report'
 		  ]
+		  
+		  echo "emailing..."
 		  
 		 mail to: 'rakesh.achar@accionlabs.com',
                  cc : 'rakesh.achar@accionlabs.com',
