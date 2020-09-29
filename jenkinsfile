@@ -27,7 +27,7 @@ node {
 	    
 	       step([$class: 'NUnitPublisher', testResultsPattern: 'testresults/*.xml', debug: false, failIfNoResults: true])
 	       
-	       bat "\"C:\Users\AL2414\.jenkins\workspace\TestPipeline\TestWebSolution\\packages\\ReportUnit.1.2.1\\tools\\ReportUnit.exe\" ./testresults/TestResult.xml"
+	       bat "\"C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\packages\\ReportUnit.1.2.1\\tools\\ReportUnit.exe\" ./testresults/TestResult.xml"
 	       	
 	    }
 	}
