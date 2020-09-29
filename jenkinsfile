@@ -3,7 +3,7 @@ node {
 	def solutionfolderpath = workspace + "\\TestWebSolution\\TestWebSolution.sln";
 	def testProjectfilepath = workspace + "\\TestWebSolution\\NUnitTestProject\\NUnitTestProject.csproj";
 	def publishfolderpath = "C:\\Jenkinsdeploy\\WebPipeline";
-	def testfilename = "${env.BUILD_ID}" + "_TestResult.xml"
+	def testfilename = "./testresults/" + "${env.BUILD_ID}" + "_TestResult.xml"
 
 	stage('Compile'){
 	   echo "Compiling.."
@@ -28,7 +28,7 @@ node {
 	    
 	       step([$class: 'NUnitPublisher', testResultsPattern: 'testresults/*.xml', debug: false, failIfNoResults: true])
 	       
-	       bat "\"C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\packages\\ReportUnit.1.2.1\\tools\\ReportUnit.exe\" ./testresults/testresult.cml"
+	       bat "\"C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\TestWebSolution\\packages\\ReportUnit.1.2.1\\tools\\ReportUnit.exe\" ${testfilename}"
 	     
 	     	publishHTML target: [
 		    allowMissing: false,
@@ -42,7 +42,7 @@ node {
 		 mail to: 'rakesh.achar@accionlabs.com',
                  cc : 'rakesh.achar@accionlabs.com',
                  subject: "BUILD SUCCESSFUL: Build Version",
-		 body: "Build Successful ${env.JOB_NAME}\n\nView the test report at:\n ${env.JOB_URL}testresults\\test.html"
+		 body: "Build Successful ${env.JOB_NAME}\n\nView the test report at:\n ${env.JOB_URL}${testfilename}"
 	    }
 	}
 	
