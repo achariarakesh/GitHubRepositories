@@ -35,7 +35,7 @@ node {
 		    alwaysLinkToLastBuild: false,
 		    keepAll: true,
 		    reportDir: 'testresults',
-		    reportFiles: ${testfilename},
+		    reportFiles: "./testresults/" + "${env.BUILD_ID}" + "_TestResult.xml",
 		    reportName: 'Test Report'
 		  ]
 		  
