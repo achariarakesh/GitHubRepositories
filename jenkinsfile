@@ -1,17 +1,6 @@
 node {
 	def workspace = pwd();
 	
-	
-        stage('Email')
-        {
-        env.ForEmailPlugin = env.WORKSPACE
-        emailext mimeType: 'text/html',
-        body: '${FILE, path="./testresults/TestResult.html"}',
-        subject: 'Hello',
-        to: 'rakesh.achar@accionlabs.com'
-	}   
-	
-	
 	stage('send email'){
 	   echo "emailing.."
 	 	 
@@ -26,8 +15,8 @@ node {
 		 alwaysLinkToLastBuild: true,
 		 keepAll: true,
 		 reportDir: '.\\testresults',
-		 reportFiles: '.\\testresults\\TestResult.html',
-		 reportName: 'TestResult.html',
+		 reportFiles: 'C:\\Users\\AL2414\\.jenkins\\workspace\\TestPipeline\\testresults\\TestResult.html',
+		 reportName: 'Test Reports',
 		 reportTitles: 'Test Report'])
 		
 	
