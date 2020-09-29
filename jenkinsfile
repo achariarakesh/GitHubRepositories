@@ -5,6 +5,8 @@ node {
 	def publishfolderpath = "C:\\Jenkinsdeploy\\WebPipeline";
 	def testfilename = "./testresults/" + "${env.BUILD_ID}" + "_TestResult.xml"
 
+	def tok = UUID.randomUUID().toString()
+	
 	stage('Compile'){
 	   echo "Compiling.."
 	   bat "\"C:\\nuget\\nuget.exe\" restore ${solutionfolderpath}"
@@ -42,14 +44,18 @@ node {
 		  echo "emailing..."
 		  
 		  
-		  mail (to: 'rakesh.achar@accionlabs.com',
+		 mail (to: 'rakesh.achar@accionlabs.com',
 		        subject: "Job '${env.JOB_BASE_NAME}' (${env.BUILD_NUMBER}) is waiting for input",
-		     	body: "Please go to console output of ${env.BUILD_URL} to approve or Reject.");
+		     	body: "Please <a href="${env.JENKINS_URL}pipeline-inputs/${tok}/proceed">approve me</a>!");
+			
+			
 			
 			timeout(time:1, unit:'MINUTES') {
-			def userInput = input(id: 'userInput', message: 'Job A Failed do you want to build Job B?', ok: 'Yes')
 			
-			echo userInput
+			input message: 'Ready?', token: tok
+			//def userInput = input(id: 'userInput', message: 'Job A Failed do you want to build Job B?', ok: 'Yes')
+			
+			//echo userInput
 			}
 
 		// mail to: 'rakesh.achar@accionlabs.com',
