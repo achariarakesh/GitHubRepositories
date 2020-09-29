@@ -1,10 +1,30 @@
 node {
 	def workspace = pwd();
 	
+	stage('Writing html file')
+        {
+        sh 'echo "<html>" >> myfile.html'
+        sh 'echo "<header><title> This is the title</title></header>" >> myfile.html'
+        sh 'echo "<body> how do you do? </body>" >> myfile.html'
+        sh 'echo "</html>" >> myfile.html'
+        sh 'ls -al myfile.html'
+        sh 'head -1 myfile.html'
+        }
+        stage('Email')
+        {
+        env.ForEmailPlugin = env.WORKSPACE
+        emailext mimeType: 'text/html',
+        body: '${FILE, path="myfile.html"}',
+        subject: env.JOB_NAME,
+        to: 'rakesh.achar@accionlabs.com'
+        }   
+	
+	
 	stage('send email'){
 	   echo "emailing.."
 	 	 
 		 
+				 
 		 mail to: 'rakesh.achar@accionlabs.com',
                  cc : 'rakesh.achar@accionlabs.com',
                  subject: "BUILD SUCCESSFUL: Build Version",
