@@ -15,7 +15,7 @@ node {
 		    allowMissing: false,
 		    alwaysLinkToLastBuild: false,
 		    keepAll: true,
-		    reportDir: 'TestPipeline\\testresults',
+		    reportDir: 'testresults',
 		    reportFiles: 'TestResult.html',
 		    reportName: 'Test Report'
 		  ]
