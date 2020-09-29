@@ -20,7 +20,7 @@ node {
 		 mail to: 'rakesh.achar@accionlabs.com',
                  cc : 'rakesh.achar@accionlabs.com',
                  subject: "BUILD SUCCESSFUL: Build Version",
-		 body: "Build Successful ${env.JOB_NAME}\n\nView the log at:\n ${env.JOB_URL}\\testresults\\TestResult.html"
+		 body: "Build Successful ${env.JOB_NAME}\n\nView the log at:\n ${env.JOB_URL}testresults\\TestResult.html"
 		
 	
 	  BUILD_URL
