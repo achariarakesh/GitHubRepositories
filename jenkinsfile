@@ -42,7 +42,7 @@ node {
 		 mail to: 'rakesh.achar@accionlabs.com',
                  cc : 'rakesh.achar@accionlabs.com',
                  subject: "BUILD SUCCESSFUL: Build Version",
-		 body: "Build Successful ${env.JOB_NAME}\n\nView the test report at:\n ${env.JOB_URL}testresults\\${testfilename}"
+		 body: "Build Successful ${env.JOB_NAME}\n\nView the test report at:\n ${env.JOB_URL}testresults\\test.html"
 	    }
 	}
 	
