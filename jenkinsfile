@@ -49,9 +49,9 @@ node {
 		        subject: "Pre-deployment approval pending '${env.JOB_BASE_NAME}' (${env.BUILD_NUMBER})",
 		     	body: """Please click <a href="${env.BUILD_URL}input">here</a> to Approve/Reject Deployment""");
 			
-			timeout(time:1, unit:'MINUTES') {
+			//timeout(time:1, unit:'MINUTES') {
 				input message: 'Click below to Approve/Reject Deployment?', token: tok
-			}
+			//}
 			
 			//timeout(time:1, unit:'MINUTES') {
 			//def userInput = input(id: 'userInput', message: 'Job A Failed do you want to build Job B?', ok: 'Yes')
