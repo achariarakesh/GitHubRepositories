@@ -5,6 +5,14 @@ node {
 	def publishfolderpath = "C:\\Jenkinsdeploy\\WebPipeline";
 	def testfilename = "./testresults/" + "${env.BUILD_ID}" + "_TestResult.xml"
 
+	parameters {
+	    choice(
+	      name: 'Environment',
+	      choices: ['DEV', 'QA', 'UAT', 'PROD'],
+	      description: 'Passing the Environment'
+	    )
+	  }
+  
 	def tok = UUID.randomUUID().toString()
 	
 	stage('Compile'){
