@@ -1,3 +1,28 @@
+// Define variables
+List Environment_list = ["\"Select:selected\"","\"Development\"","\"QA\""]
+List development_list = ["\"Select:selected\"","\"DevServer1\"","\"DevServer2\"","\"DevServer3\""]
+List qa_list = ["\"Select:selected\"","\"QAServer1\"","\"QAServer2\"","\"QASever3\""]
+List default_item = ["\"Not Applicable\""]
+String Environments = buildScript(category_list)
+String devservers = buildScript(vegetables_list)
+String qaservers = buildScript(fruits_list)
+String items = populateItems(default_item,development_list,qa_list)
+// Methods to build groovy scripts to populate data
+String buildScript(List values){
+  return "return $values"
+}
+String populateItems(List default_item, List development_list, List qa_list){
+return """if(Environments.equals('Development')){
+     return $devserversList
+     }
+     else if(Environments.equals('QA')){
+     return $qaserversList
+     }else{
+     return $default_item
+     }
+     """
+}
+
 node {
 	def workspace = pwd();
 	def solutionfolderpath = workspace + "\\TestWebSolution\\TestWebSolution.sln";
