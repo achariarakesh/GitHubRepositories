@@ -15,7 +15,7 @@ String populateItems(List default_item, List development_list, List qa_list){
 return """if(Environments.equals('Development')){
      return $devserversList
      }
-     else if(Environments.equals('QA')){
+     else if(Environments.equals('QA')) {
      return $qaserversList
      }else{
      return $default_item
