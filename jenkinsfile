@@ -1,7 +1,7 @@
 node {
 	def workspace = pwd();
 	def solutionfolderpath = workspace + "\\TestWebSolution\\TestWebSolution.sln";
-	def testProjectfilepath = workspace + "\\TestWebSolution\\NUnitTestProject\\NUnitTestProject.csproj";
+	def testProjectfilepath = workspace + "\\TestWebSolution\\FunctionalTest\\FunctionalTest.csproj";
 	def publishfolderpath = "C:\\Jenkinsdeploy\\WebPipeline";
 	def testfilename = "./testresults/" + "${env.BUILD_ID}" + "_TestResult.xml"
 	  
